@@ -35,7 +35,7 @@ public class EventPanel extends JPanel {
 
         if (event instanceof Meeting) {
             Meeting m = (Meeting) event;
-            sb.append("End Time: ").append(m.getEndTime().format(formatter)).append("<br>");
+            sb.append("End Time: ").append(m.getEndDateTime().format(formatter)).append("<br>");
             sb.append("Duration (min): ").append(m.getDuration().toMinutes()).append("<br>");
             sb.append("Location: ").append(m.getLocation()).append("<br>");
         }

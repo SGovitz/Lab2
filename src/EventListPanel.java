@@ -35,7 +35,7 @@ public class EventListPanel extends JPanel {
 
         addEventButton = new JButton("Add Event");
         addEventButton.addActionListener(e -> {
-            AddEventModal modal = new AddEventModal(this);
+            addEventModal modal = new addEventModal(this);
             modal.setVisible(true);
         });
         controlPanel.add(addEventButton);

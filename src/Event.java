@@ -9,7 +9,7 @@ public abstract class Event implements Comparable<Event> {
         this.dateTime = dateTime;
     }
 
-    // Each subclass can decide how to return the name.
+    // Each subclass decides how to return the name.
     public abstract String getName();
 
     public LocalDateTime getDateTime() {
