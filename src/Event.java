@@ -1,5 +1,6 @@
 import java.time.LocalDateTime;
 
+//Creates an event with a given date and time
 public abstract class Event implements Comparable<Event> {
     protected String name;
     protected LocalDateTime dateTime;
@@ -25,7 +26,6 @@ public abstract class Event implements Comparable<Event> {
     }
 
     // Compare events based on their starting time.
-    @Override
     public int compareTo(Event other) {
         return this.dateTime.compareTo(other.dateTime);
     }

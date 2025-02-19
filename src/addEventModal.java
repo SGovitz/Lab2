@@ -3,18 +3,20 @@ import java.awt.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+//Creates window to add new events to the event list
 class addEventModal extends JDialog {
     private EventListPanel eventListPanel;
     private JRadioButton deadlineRadio;
     private JRadioButton meetingRadio;
     private JTextField nameField;
     private JTextField startField;   // Expected format: yyyy-MM-dd HH:mm
-    private JTextField endField;     // Only for meetings
-    private JTextField locationField;// Only for meetings
+    private JTextField endField;
+    private JTextField locationField;
     private JButton addButton;
     private JButton cancelButton;
     private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
+    //Constructor for addEventModal
     public addEventModal(EventListPanel eventListPanel) {
         this.eventListPanel = eventListPanel;
         setTitle("Add Event");
@@ -24,10 +26,10 @@ class addEventModal extends JDialog {
         initComponents();
     }
 
+    //Initializes and sets up the components of the addEventModal
     private void initComponents() {
         setLayout(new BorderLayout());
 
-        // Type selection panel.
         JPanel typePanel = new JPanel();
         deadlineRadio = new JRadioButton("Deadline", true);
         meetingRadio = new JRadioButton("Meeting");
@@ -38,7 +40,6 @@ class addEventModal extends JDialog {
         typePanel.add(meetingRadio);
         add(typePanel, BorderLayout.NORTH);
 
-        // Form panel for event details.
         JPanel formPanel = new JPanel(new GridLayout(5, 2));
         formPanel.add(new JLabel("Name:"));
         nameField = new JTextField();
@@ -57,7 +58,7 @@ class addEventModal extends JDialog {
         formPanel.add(locationField);
         add(formPanel, BorderLayout.CENTER);
 
-        // Button panel.
+
         JPanel buttonPanel = new JPanel();
         addButton = new JButton("Add");
         cancelButton = new JButton("Cancel");
@@ -65,11 +66,9 @@ class addEventModal extends JDialog {
         buttonPanel.add(cancelButton);
         add(buttonPanel, BorderLayout.SOUTH);
 
-        // Button actions.
         addButton.addActionListener(e -> addEvent());
         cancelButton.addActionListener(e -> dispose());
 
-        // Enable/disable meeting-specific fields.
         deadlineRadio.addActionListener(e -> {
             endField.setEnabled(false);
             locationField.setEnabled(false);
@@ -78,11 +77,12 @@ class addEventModal extends JDialog {
             endField.setEnabled(true);
             locationField.setEnabled(true);
         });
-        // Initially, deadline is selected.
+
         endField.setEnabled(false);
         locationField.setEnabled(false);
     }
 
+    //Adds a new event based on user input
     private void addEvent() {
         String name = nameField.getText().trim();
         String startStr = startField.getText().trim();

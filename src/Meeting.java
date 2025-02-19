@@ -1,6 +1,7 @@
 import java.time.Duration;
 import java.time.LocalDateTime;
 
+//Creates an event that has a start and end time, location, and status of if completed or not
 public class Meeting extends Event implements Completable {
     private LocalDateTime endDateTime;
     private String location;
@@ -13,17 +14,14 @@ public class Meeting extends Event implements Completable {
         this.complete = false;
     }
 
-    @Override
     public String getName() {
         return name;
     }
 
-    @Override
     public void complete() {
         complete = true;
     }
 
-    @Override
     public boolean isComplete() {
         return complete;
     }

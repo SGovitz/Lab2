@@ -1,5 +1,6 @@
 import java.time.LocalDateTime;
 
+//Creates deadline-based events if any are needed
 public class Deadline extends Event implements Completable {
     private boolean complete;
 
@@ -8,17 +9,14 @@ public class Deadline extends Event implements Completable {
         this.complete = false;
     }
 
-    @Override
     public String getName() {
         return name;
     }
 
-    @Override
     public void complete() {
         complete = true;
     }
 
-    @Override
     public boolean isComplete() {
         return complete;
     }

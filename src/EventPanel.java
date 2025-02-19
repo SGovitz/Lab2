@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.time.format.DateTimeFormatter;
 
+//A panel that visually represents an event, displaying its details and providing a complete button if completed
 public class EventPanel extends JPanel {
     private Event event;
     private JButton completeButton;
@@ -26,7 +27,7 @@ public class EventPanel extends JPanel {
         }
     }
 
-    // Build an HTML string to display the event’s information.
+    // Builds a string to display the event’s information.
     private String getEventInfo() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         StringBuilder sb = new StringBuilder("<html>");

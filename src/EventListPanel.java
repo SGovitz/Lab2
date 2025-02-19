@@ -1,10 +1,10 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
 
+//manages the list of events
 public class EventListPanel extends JPanel {
     private ArrayList<Event> events;
     private JPanel controlPanel;
@@ -42,13 +42,12 @@ public class EventListPanel extends JPanel {
 
         add(controlPanel, BorderLayout.NORTH);
 
-        // Panel that holds the list of EventPanels.
         displayPanel = new JPanel();
         displayPanel.setLayout(new BoxLayout(displayPanel, BoxLayout.Y_AXIS));
         JScrollPane scrollPane = new JScrollPane(displayPanel);
         add(scrollPane, BorderLayout.CENTER);
 
-        // Add default events for demonstration.
+
         addDefaultEvents();
     }
 
@@ -101,7 +100,7 @@ public class EventListPanel extends JPanel {
         displayPanel.repaint();
     }
 
-    // Adds some default events (one Deadline and one Meeting) for demonstration.
+    // Adds some default events for demonstration.
     private void addDefaultEvents() {
         Deadline deadline = new Deadline("Submit Report", LocalDateTime.now().plusDays(2));
         Meeting meeting = new Meeting("Project Meeting",
