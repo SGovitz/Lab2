@@ -1,9 +1,4 @@
-public class Completable {
-    void complete(){
-
-    }
-    boolean isComplete(){
-
-    }
-
+public interface Completable {
+    void complete();
+    boolean isComplete();
 }
