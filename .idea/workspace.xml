@@ -4,18 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8174dfdd-f265-4c3f-b3cd-379859799593" name="Changes" comment="Start of lab 4">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Lab 2.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Lab 2.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Completable.java" beforeDir="false" afterPath="$PROJECT_DIR$/source/Completable.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Deadline.java" beforeDir="false" afterPath="$PROJECT_DIR$/source/Deadline.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Event.java" beforeDir="false" afterPath="$PROJECT_DIR$/source/Event.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/EventListPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/source/EventListPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/EventPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/source/EventPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/EventTester.java" beforeDir="false" afterPath="$PROJECT_DIR$/source/EventTester.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Meeting.java" beforeDir="false" afterPath="$PROJECT_DIR$/source/Meeting.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/addEventModal.java" beforeDir="false" afterPath="$PROJECT_DIR$/source/addEventModal.java" afterDir="false" />
-    </list>
+    <list default="true" id="8174dfdd-f265-4c3f-b3cd-379859799593" name="Changes" comment="Added files for lab 4 changes" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -78,6 +67,7 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\smgbo\IdeaProjects\Lab_2" />
       <recent name="C:\Users\smgbo\IdeaProjects\Lab_2\source" />
     </key>
   </component>
@@ -110,7 +100,7 @@
       <workItem from="1739206232257" duration="7475000" />
       <workItem from="1739926878048" duration="2713000" />
       <workItem from="1739940709528" duration="1414000" />
-      <workItem from="1745378602831" duration="4185000" />
+      <workItem from="1745378602831" duration="4681000" />
     </task>
     <task id="LOCAL-00001" summary="Adding required classes">
       <option name="closed" value="true" />
@@ -152,7 +142,15 @@
       <option name="project" value="LOCAL" />
       <updated>1745379099463</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Added files for lab 4 changes">
+      <option name="closed" value="true" />
+      <created>1745428341451</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1745428341451</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -163,6 +161,7 @@
     <MESSAGE value="Update" />
     <MESSAGE value="working" />
     <MESSAGE value="Start of lab 4" />
-    <option name="LAST_COMMIT_MESSAGE" value="Start of lab 4" />
+    <MESSAGE value="Added files for lab 4 changes" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added files for lab 4 changes" />
   </component>
 </project>
