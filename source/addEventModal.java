@@ -2,21 +2,27 @@ import javax.swing.*;
 import java.awt.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
+import java.util.Map;
 
-//Creates window to add new events to the event list
-class addEventModal extends JDialog {
-    private EventListPanel eventListPanel;
+/**
+ * Dialog to add new events via Factory Method
+ */
+public class addEventModal extends JDialog {
+    private final EventListPanel eventListPanel;
     private JRadioButton deadlineRadio;
     private JRadioButton meetingRadio;
     private JTextField nameField;
-    private JTextField startField;   // Expected format: yyyy-MM-dd HH:mm
+    private JTextField startField;
     private JTextField endField;
     private JTextField locationField;
     private JButton addButton;
     private JButton cancelButton;
     private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
-    //Constructor for addEventModal
+    // Map of radio buttons to their factories
+    private Map<JRadioButton, EventFactory> factories;
+
     public addEventModal(EventListPanel eventListPanel) {
         this.eventListPanel = eventListPanel;
         setTitle("Add Event");
@@ -26,10 +32,10 @@ class addEventModal extends JDialog {
         initComponents();
     }
 
-    //Initializes and sets up the components of the addEventModal
     private void initComponents() {
         setLayout(new BorderLayout());
 
+        // Type selection
         JPanel typePanel = new JPanel();
         deadlineRadio = new JRadioButton("Deadline", true);
         meetingRadio = new JRadioButton("Meeting");
@@ -40,25 +46,24 @@ class addEventModal extends JDialog {
         typePanel.add(meetingRadio);
         add(typePanel, BorderLayout.NORTH);
 
+        // Initialize factories
+        factories = new HashMap<>();
+        factories.put(deadlineRadio, new DeadlineFactory());
+        factories.put(meetingRadio, new MeetingFactory());
+
+        // Form inputs
         JPanel formPanel = new JPanel(new GridLayout(5, 2));
         formPanel.add(new JLabel("Name:"));
-        nameField = new JTextField();
-        formPanel.add(nameField);
-
+        nameField = new JTextField(); formPanel.add(nameField);
         formPanel.add(new JLabel("Start (yyyy-MM-dd HH:mm):"));
-        startField = new JTextField();
-        formPanel.add(startField);
-
+        startField = new JTextField(); formPanel.add(startField);
         formPanel.add(new JLabel("End (for Meeting):"));
-        endField = new JTextField();
-        formPanel.add(endField);
-
+        endField = new JTextField(); formPanel.add(endField);
         formPanel.add(new JLabel("Location (for Meeting):"));
-        locationField = new JTextField();
-        formPanel.add(locationField);
+        locationField = new JTextField(); formPanel.add(locationField);
         add(formPanel, BorderLayout.CENTER);
 
-
+        // Buttons
         JPanel buttonPanel = new JPanel();
         addButton = new JButton("Add");
         cancelButton = new JButton("Cancel");
@@ -66,9 +71,9 @@ class addEventModal extends JDialog {
         buttonPanel.add(cancelButton);
         add(buttonPanel, BorderLayout.SOUTH);
 
+        // Actions
         addButton.addActionListener(e -> addEvent());
         cancelButton.addActionListener(e -> dispose());
-
         deadlineRadio.addActionListener(e -> {
             endField.setEnabled(false);
             locationField.setEnabled(false);
@@ -78,11 +83,11 @@ class addEventModal extends JDialog {
             locationField.setEnabled(true);
         });
 
+        // Initial state
         endField.setEnabled(false);
         locationField.setEnabled(false);
     }
 
-    //Adds a new event based on user input
     private void addEvent() {
         String name = nameField.getText().trim();
         String startStr = startField.getText().trim();
@@ -92,23 +97,28 @@ class addEventModal extends JDialog {
         }
         try {
             LocalDateTime startDateTime = LocalDateTime.parse(startStr, formatter);
-            if (deadlineRadio.isSelected()) {
-                Deadline deadline = new Deadline(name, startDateTime);
-                eventListPanel.addEvent(deadline);
-            } else if (meetingRadio.isSelected()) {
+            EventFactory factory = deadlineRadio.isSelected()
+                    ? factories.get(deadlineRadio)
+                    : factories.get(meetingRadio);
+            LocalDateTime endDateTime = null;
+            String location = null;
+            if (meetingRadio.isSelected()) {
                 String endStr = endField.getText().trim();
-                String location = locationField.getText().trim();
+                location = locationField.getText().trim();
                 if (endStr.isEmpty() || location.isEmpty()) {
-                    JOptionPane.showMessageDialog(this, "End time and Location are required for a meeting.");
+                    JOptionPane.showMessageDialog(this,
+                            "End time and Location are required for a meeting.");
                     return;
                 }
-                LocalDateTime endDateTime = LocalDateTime.parse(endStr, formatter);
-                Meeting meeting = new Meeting(name, startDateTime, endDateTime, location);
-                eventListPanel.addEvent(meeting);
+                endDateTime = LocalDateTime.parse(endStr, formatter);
             }
+            Event e = factory.createEvent(name, startDateTime, endDateTime, location);
+            eventListPanel.addEvent(e);
             dispose();
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this, "Error parsing date/time. Please use format yyyy-MM-dd HH:mm");
+            JOptionPane.showMessageDialog(this,
+                    "Error parsing date/time. Please use format yyyy-MM-dd HH:mm");
         }
     }
 }
+

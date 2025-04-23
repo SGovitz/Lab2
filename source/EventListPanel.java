@@ -2,37 +2,49 @@ import javax.swing.*;
 import java.awt.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 
-//manages the list of events
+
 public class EventListPanel extends JPanel {
-    private ArrayList<Event> events;
+    private final List<Event> events;
     private JPanel controlPanel;
     private JPanel displayPanel;
     private JComboBox<String> sortDropDown;
     private JCheckBox filterCompletedCheckBox;
     private JButton addEventButton;
+    private Map<String, SortStrategy> sortStrategies;
 
     public EventListPanel() {
         events = new ArrayList<>();
         setLayout(new BorderLayout());
 
-        // Top control panel.
+        // Top control panel
         controlPanel = new JPanel();
 
-        sortDropDown = new JComboBox<>(new String[]{
-                "Sort by Date", "Sort by Date (Reverse)", "Sort by Name", "Sort by Name (Reverse)"
-        });
+        // Initialize sorting strategies
+        sortStrategies = new LinkedHashMap<>();
+        sortStrategies.put("Sort by Date", new SortByDateAscending());
+        sortStrategies.put("Sort by Date (Reverse)", new SortByDateDescending());
+        sortStrategies.put("Sort by Name", new SortByNameAscending());
+        sortStrategies.put("Sort by Name (Reverse)", new SortByNameDescending());
+
+        // Create combo box from strategy keys
+        sortDropDown = new JComboBox<>(sortStrategies.keySet().toArray(new String[0]));
         sortDropDown.addActionListener(e -> {
-            sortEvents((String) sortDropDown.getSelectedItem());
+            SortStrategy strategy = sortStrategies.get(sortDropDown.getSelectedItem());
+            strategy.sort(events);
             updateDisplayPanel();
         });
         controlPanel.add(sortDropDown);
 
+        // Filter completed events checkbox
         filterCompletedCheckBox = new JCheckBox("Hide Completed");
         filterCompletedCheckBox.addActionListener(e -> updateDisplayPanel());
         controlPanel.add(filterCompletedCheckBox);
 
+        // Add Event button
         addEventButton = new JButton("Add Event");
         addEventButton.addActionListener(e -> {
             addEventModal modal = new addEventModal(this);
@@ -42,16 +54,16 @@ public class EventListPanel extends JPanel {
 
         add(controlPanel, BorderLayout.NORTH);
 
+        // Display panel inside a scroll pane
         displayPanel = new JPanel();
         displayPanel.setLayout(new BoxLayout(displayPanel, BoxLayout.Y_AXIS));
         JScrollPane scrollPane = new JScrollPane(displayPanel);
         add(scrollPane, BorderLayout.CENTER);
 
-
         addDefaultEvents();
     }
 
-    // Main method to launch the GUI.
+    // Launch the GUI
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
             JFrame frame = new JFrame("Event Planner");
@@ -62,30 +74,13 @@ public class EventListPanel extends JPanel {
         });
     }
 
-    // Add an event to the list and update the display.
+    // Add an event and refresh
     public void addEvent(Event event) {
         events.add(event);
         updateDisplayPanel();
     }
 
-    private void sortEvents(String criteria) {
-        switch (criteria) {
-            case "Sort by Date":
-                Collections.sort(events);
-                break;
-            case "Sort by Date (Reverse)":
-                Collections.sort(events, Collections.reverseOrder());
-                break;
-            case "Sort by Name":
-                events.sort((e1, e2) -> e1.getName().compareTo(e2.getName()));
-                break;
-            case "Sort by Name (Reverse)":
-                events.sort((e1, e2) -> e2.getName().compareTo(e1.getName()));
-                break;
-        }
-    }
-
-    // Rebuilds the display panel from the events list.
+    // Refresh the display panel
     private void updateDisplayPanel() {
         displayPanel.removeAll();
         for (Event e : events) {
@@ -100,7 +95,7 @@ public class EventListPanel extends JPanel {
         displayPanel.repaint();
     }
 
-    // Adds some default events for demonstration.
+    // Add sample events
     private void addDefaultEvents() {
         Deadline deadline = new Deadline("Submit Report", LocalDateTime.now().plusDays(2));
         Meeting meeting = new Meeting("Project Meeting",
