@@ -4,12 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8174dfdd-f265-4c3f-b3cd-379859799593" name="Changes" comment="working">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/EventListPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/EventListPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/EventPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/EventPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/addEventModal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/addEventModal.java" afterDir="false" />
-    </list>
+    <list default="true" id="8174dfdd-f265-4c3f-b3cd-379859799593" name="Changes" comment="working" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -90,6 +85,7 @@
       <workItem from="1739206232257" duration="7475000" />
       <workItem from="1739926878048" duration="2713000" />
       <workItem from="1739940709528" duration="1414000" />
+      <workItem from="1745378602831" duration="429000" />
     </task>
     <task id="LOCAL-00001" summary="Adding required classes">
       <option name="closed" value="true" />
